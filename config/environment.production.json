@@ -1,0 +1,5 @@
+{
+  "debug": false,
+  "testing": false,
+  "endpoint": "http://localhost:8000"
+}

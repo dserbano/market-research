@@ -1,0 +1,16 @@
+<template bindable="iter, volume">
+  <require from="components/chart"></require>
+
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title">Search Volume</h5>
+    </div>
+    <div class="row" style="padding: 15px;">
+      <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 py-2 h-100" repeat.for="trend of volume">
+        <h5 class="card-title"><span class="badge badge-pill badge-primary">${trend.keyword}</span></h5>
+        <p class="card-text"><chart title.bind="'Trends'" labels.bind="trend.monthly_searches.dates" data.bind="trend.monthly_searches.trends"></chart></p>
+        <p class="card-text"><chart title.bind="'MSE'" labels.bind="iter" data.bind="trend.monthly_searches.mses"></chart></p>
+      </div>
+    </div>
+  </div>
+</template>

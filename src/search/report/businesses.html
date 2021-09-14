@@ -1,0 +1,44 @@
+<template bindable="businesses">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title">Businesses</h5>
+    </div>
+    <div style="border-bottom: 1px solid rgba(0,0,0,.12);" repeat.for="business of businesses">
+      <h4 style="text-align: center; padding-top:10px; padding-bottom:10px; border-bottom: 1px solid rgba(0,0,0,.12);">${business.name}</h4>
+      <div class="row" style="margin: 20px">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 py-2 h-100">
+          <h5 class="card-title">Type</h5>
+          <p class="card-text">${business.type}</p>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 py-2 h-100">
+          <h5 class="card-title">Industry</h5>
+          <p class="card-text">${business.industry}</p>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 py-2 h-100">
+          <h5 class="card-title">Location</h5>
+          <p class="card-text">${business.location}</p>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 py-2 h-100">
+          <h5 class="card-title">Website</h5>
+          <p class="card-text"><p repeat.for="website of business.websites"><a href.bind="website">${website}</a></p></p>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 py-2 h-100">
+          <h5 class="card-title">Key People</h5>
+          <p class="card-text">${business.key_people}</p>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 py-2 h-100">
+          <h5 class="card-title">Founded</h5>
+          <p class="card-text">${business.founded}</p>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 py-2 h-100">
+          <h5 class="card-title">Products</h5>
+          <p class="card-text">${business.products}</p>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 py-2 h-100">
+          <h5 class="card-title">Keywords</h5>
+          <p class="card-text"><span class="badge badge-pill badge-primary" repeat.for="keyword of business.keywords">${keyword}</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

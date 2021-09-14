@@ -1,0 +1,97 @@
+<template>
+  <require from="components/awesome-icon"></require>
+  <require from="../components/date-format"></require>
+  <require from="../components/sort"></require>
+  <require from="../components/split"></require>
+
+  <div class="container">
+    <div class="container-fluid"></div>
+    <div class="row py-5">
+      <div class="col-lg-9 mx-auto text-white text-center">
+        <h1 class="display-4" style="color: #212529;">Market Research Platform</h1>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-lg-8 mx-auto">
+        <div class="bg-white p-5 rounded shadow">
+          <div class="row">
+            <div class="form-group col-md-9">
+              <input id="exampleFormControlInput5" value.bind="keywords" type="text" placeholder="What're you searching for?" class="form-control form-control-underlined">
+            </div>
+            <div class="form-group col-md-3">
+              <button click.delegate="newTask()" class="btn btn-primary rounded-pill btn-block shadow-sm">Search</button>
+            </div>
+          </div> 
+        </div>
+        <div class="card">
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width:25%;">Task</th>
+                <th style="width:25%">Keywords</th>
+                <th style="width:25%" class="d-none d-md-table-cell">Creation Date</th>
+                <th style="width:25%">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr repeat.for="task of tasks | sort: 'id':'ascending' ">
+                <td>${task.id}</td>
+                <td>
+                  <span repeat.for="keyword of task.from_keywords | split: ' '" class="badge badge-pill badge-primary">
+                    ${keyword}
+                  </span>
+                </td>
+                <td class="d-none d-md-table-cell">${task.timestamp | dateFormat:'Do MMMM YYYY'}</td>
+                <td>
+                  <button click.delegate="executeTask(task)" type="button" class="btn btn-primary"><awesome-icon class="p-2" icon.bind="'play'"></awesome-icon></button>
+                  <div if.bind="currentTask.id == task.id" style="text-align: left;">
+                    <p class="h6" style="text-align: center; color:#808080;">Agreggating</p>
+                    <button class="btn btn-primary" type="button" disabled>
+                      <span if.bind="!currentTask.keywords" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                      <awesome-icon if.bind="currentTask.keywords" class="p-2" icon.bind="'check'"></awesome-icon>
+                      Keywords
+                    </button> 
+                    <button class="btn btn-primary" type="button" disabled>
+                      <span if.bind="!currentTask.businesses" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                      <awesome-icon if.bind="currentTask.businesses" class="p-2" icon.bind="'check'"></awesome-icon>
+                      Businesses
+                    </button>       
+                    <button class="btn btn-primary" type="button" disabled>
+                      <span if.bind="!currentTask.products" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                      <awesome-icon if.bind="currentTask.products" class="p-2" icon.bind="'check'"></awesome-icon>
+                      Products
+                    </button> 
+                    <button class="btn btn-primary" type="button" disabled>
+                      <span if.bind="!currentTask.search_volume" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                      <awesome-icon if.bind="currentTask.search_volume" class="p-2" icon.bind="'check'"></awesome-icon>
+                      Search V.
+                    </button> 
+                    <p class="h6" style="text-align: center; color:#808080;">Analyzing</p>
+                    <button class="btn btn-primary" type="button" disabled>
+                      <span if.bind="!currentTask.forecasts_search_volume" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                      <awesome-icon if.bind="currentTask.forecasts_search_volume" class="p-2" icon.bind="'check'"></awesome-icon>
+                      Forecasts
+                    </button> 
+                    <button class="btn btn-primary" type="button" disabled>
+                      <span if.bind="!currentTask.clusters_products" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                      <awesome-icon if.bind="currentTask.clusters_products" class="p-2" icon.bind="'check'"></awesome-icon>
+                      Clusters
+                    </button> 
+
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footerfix"></div>
+  <footer class="text-center text-lg-start bg-light text-muted">
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2021 Copyright:
+    </div>
+  </footer>
+
+</template>

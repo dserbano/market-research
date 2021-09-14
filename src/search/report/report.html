@@ -1,0 +1,51 @@
+<template>
+  <require from="components/awesome-icon"></require>
+
+  <require from="./businesses.html"></require>
+  <require from="./products.html"></require>
+  <require from="./volume.html"></require>
+
+  <div class="d-flex bd-highlight" style="width: 100%;" >
+    <!-- Sidebar  -->
+    <nav id="sidebar" class.bind="isActive ? 'active' : ''">
+      <div class="sidebar-header unselectable">
+        <h3>Report</h3>
+      </div>
+      <ul class="list-unstyled components unselectable">
+        <li class.bind="view == 'volume'? 'active' : ''">
+          <a click.delegate="changeView('volume')">Search Volume</a>
+        </li>
+        <li class.bind="view == 'businesses'? 'active' : ''">
+          <a click.delegate="changeView('businesses')">Businesses</a>
+        </li>
+        <li class.bind="view == 'products'? 'active' : ''">
+          <a click.delegate="changeView('products')">Products</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content" style="height:100vh; width: 100vw; overflow-y: auto;" class="p-2 bd-highlight">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button click.delegate="collapse()" class="btn btn-primary" type="button">
+            <awesome-icon class="p-2" icon.bind="'bars'"></awesome-icon>
+            Toggle Sidebar
+          </button> 
+          <div if.bind="loading" class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>       
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="fas fa-align-justify"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="col-12">
+        <businesses show.bind="view == 'businesses'" businesses.bind="businesses"></businesses>
+        <products show.bind="view == 'products'" clusters.bind="clusters_products"></products>
+        <volume show.bind="view == 'volume'" volume.bind="forecasts_volume" iter.bind="iter"></volume>
+      </div>
+  </div>
+
+
+</template>

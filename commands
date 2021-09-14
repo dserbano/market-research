@@ -1,0 +1,23 @@
+## Local Development
+
+Run `npm start`, then open `http://localhost:8080`
+
+## Deploy on EC2
+
+ssh -i "market-research-keys1.pem" -t ec2-user@ec2-3-64-62-252.eu-central-1.compute.amazonaws.com 
+sudo docker stop market-research-container
+sudo docker rm market-research-container
+cd market-research
+sudo git pull
+sudo docker build -t market-research .
+sudo docker run -p 80:80 --name market-research-container market-research 
+
+## Unit tests
+
+Run `au test` (or `au jest`).
+
+To run in watch mode, `au test --watch` or `au jest --watch`.
+
+## Production Link
+
+http://ec2-3-64-62-252.eu-central-1.compute.amazonaws.com/

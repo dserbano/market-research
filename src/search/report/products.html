@@ -1,0 +1,30 @@
+<template bindable="clusters">
+  <require from="../../components/sort"></require>
+
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title">Products</h5>
+    </div>
+    <div class="card" repeat.for="cluster of clusters">
+      <div class="card-header">
+        <h5 class="card-title">Cluster nr. ${cluster.cluster}</h5><span class="badge badge-pill badge-primary" repeat.for="keyword of cluster.keywords">${keyword}</span>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr >
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr repeat.for="product of cluster.products | sort: 'price':'ascending'">
+            <td><a href="${product.url}"><div style="background-color: black;"><img class="img-thumbnail center-block img-responsive" src="${product.img}" /></div></a></td>
+            <td>${product.name}</td>
+            <td>${product.price} <span if.bind="!product.currency">$</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>
